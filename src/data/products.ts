@@ -9,6 +9,10 @@ export type Product = {
   stock: number;
 };
 
+export type CartItem = Product & {
+  quantity: number;
+};
+
 export const products: Product[] = [
   {
     id: 1,

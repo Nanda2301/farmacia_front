@@ -20,15 +20,13 @@ export const Hero: React.FC<Props> = ({ setCurrentPage }) => {
             </p>
             <div className="flex gap-4">
               <button
-                onClick={() => setCurrentPage("products")}
+                onClick={() => setCurrentPage("/#products")}
                 className="bg-gradient-to-r from-cyan-500 to-teal-500 text-white px-8 py-3 rounded-full font-semibold hover:scale-105 transition shadow-lg flex items-center gap-2"
               >
                 <ShoppingBag className="w-5 h-5" />
                 Ver Produtos
               </button>
-              <button className="bg-white text-cyan-600 px-8 py-3 rounded-full font-semibold hover:scale-105 transition shadow-lg border-2 border-cyan-500">
-                Saiba Mais
-              </button>
+
             </div>
           </div>
           <div className="text-center text-9xl animate-bounce">🐱🐶</div>

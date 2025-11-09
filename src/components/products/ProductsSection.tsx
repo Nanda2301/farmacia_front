@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Search, Star, Package, ShoppingCart, Heart } from "lucide-react";
-import { products as productsData, categories as categoriesData, type Product } from "../../data/products";
+import { categories as categoriesData, type Product } from "../../data/products";
+import { products as productsData } from "../../data/products";
+
+type ProductsData = typeof productsData;
 
 type Props = {
+  products: ProductsData;
   addToCart: (p: Product) => void;
   favorites: number[];
   toggleFavorite: (id: number) => void;
@@ -13,6 +17,7 @@ type Props = {
 };
 
 export const ProductsSection: React.FC<Props> = ({
+  products,
   addToCart,
   favorites,
   toggleFavorite,
@@ -21,7 +26,15 @@ export const ProductsSection: React.FC<Props> = ({
   searchTerm,
   setSearchTerm,
 }) => {
-  const filteredProducts = productsData.filter((product) => {
+
+  useEffect(() => {
+    if (window.location.hash === '#products') {
+      const section = document.getElementById('products-section');
+      section?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
+
+  const filteredProducts = products.filter((product) => {
     const matchesCategory = selectedCategory === "Todos" || product.category === selectedCategory;
     const lower = searchTerm.toLowerCase();
     const matchesSearch =
@@ -30,10 +43,11 @@ export const ProductsSection: React.FC<Props> = ({
   });
 
   return (
-    <section className="py-16 bg-gradient-to-br from-cyan-50 via-blue-50 to-teal-50">
+    <section id="products-section" className="py-16 bg-gradient-to-br from-cyan-50 via-blue-50 to-teal-50">
       <div className="container mx-auto px-4">
         <h3 className="text-3xl font-bold text-center text-gray-800 mb-8">Nossos Produtos Mágicos 🪄</h3>
-
+        
+        {/* ... (restante do código de busca e categorias) ... */}
         <div className="max-w-2xl mx-auto mb-8">
           <div className="relative">
             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />

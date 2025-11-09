@@ -11,26 +11,37 @@ import {
 } from "lucide-react";
 
 type NavbarProps = {
-  currentPage: string;
-  setCurrentPage: (page: string) => void;
   cartCount: number;
   isMenuOpen: boolean;
   setIsMenuOpen: (value: boolean) => void;
+  navigate: (path: string) => void;
 };
 
 const Navbar: React.FC<NavbarProps> = ({
-  currentPage,
-  setCurrentPage,
+  navigate,
   cartCount,
   isMenuOpen,
   setIsMenuOpen,
 }) => {
+  const currentPath = window.location.pathname;
+
+  const handleNavigation = (path: string) => {
+    navigate(path);
+    setIsMenuOpen(false);
+  };
+
+  // Lógica para destacar o item do menu baseado na rota
+  const getPageClass = (path: string) => {
+    if (path === '/') return currentPath === '/' || currentPath === '/products' ? "text-yellow-200" : "";
+    return currentPath.startsWith(path) ? "text-yellow-200" : "";
+  }
+
   return (
-    <header className="bg-gradient-to-r from-cyan-400 via-teal-400 to-blue-400 text-white shadow-lg z-50">
+    <header className="bg-gradient-to-r from-cyan-400 via-teal-400 to-blue-400 text-white shadow-lg z-50 sticky top-0">
       <div className="container mx-auto px-4 py-4">
         {/* Logo e Título */}
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3 cursor-pointer select-none">
+          <div className="flex items-center gap-3 cursor-pointer select-none" onClick={() => handleNavigation('/')}>
             <div className="bg-white p-2 rounded-full shadow-md">
               <Fish className="w-8 h-8 text-cyan-500" />
             </div>
@@ -47,36 +58,31 @@ const Navbar: React.FC<NavbarProps> = ({
           {/* Menu Desktop */}
           <nav className="hidden md:flex items-center gap-6">
             <button
-              onClick={() => setCurrentPage("home")}
-              className={`hover:text-yellow-200 transition flex items-center gap-2 ${
-                currentPage === "home" ? "text-yellow-200" : ""
-              }`}
+              onClick={() => handleNavigation("/")}
+              className={`hover:text-yellow-200 transition flex items-center gap-2 ${getPageClass("/")}`}
             >
               <Home className="w-5 h-5" />
               Início
             </button>
 
             <button
-              onClick={() => setCurrentPage("products")}
-              className={`hover:text-yellow-200 transition flex items-center gap-2 ${
-                currentPage === "products" ? "text-yellow-200" : ""
-              }`}
+              onClick={() => handleNavigation("/#products")}
+              className={`hover:text-yellow-200 transition flex items-center gap-2 ${getPageClass("/products")}`}
             >
               <Grid className="w-5 h-5" />
               Produtos
             </button>
 
             <button
-              onClick={() => setCurrentPage("profile")}
-              className={`hover:text-yellow-200 transition flex items-center gap-2 ${
-                currentPage === "profile" ? "text-yellow-200" : ""
-              }`}
+              onClick={() => handleNavigation("/profile")}
+              className={`hover:text-yellow-200 transition flex items-center gap-2 ${getPageClass("/profile")}`}
             >
               <UserCircle className="w-5 h-5" />
               Perfil
             </button>
 
             <button
+              onClick={() => handleNavigation("/cart")}
               className="relative hover:scale-110 transition"
               aria-label="Carrinho de compras"
             >
@@ -103,10 +109,7 @@ const Navbar: React.FC<NavbarProps> = ({
         {isMenuOpen && (
           <nav className="md:hidden mt-4 pb-4 space-y-2 animate-fade-in-down">
             <button
-              onClick={() => {
-                setCurrentPage("home");
-                setIsMenuOpen(false);
-              }}
+              onClick={() => handleNavigation("/")}
               className="w-full text-left py-2 hover:bg-cyan-500 px-4 rounded flex items-center gap-2"
             >
               <Home className="w-5 h-5" />
@@ -114,10 +117,7 @@ const Navbar: React.FC<NavbarProps> = ({
             </button>
 
             <button
-              onClick={() => {
-                setCurrentPage("products");
-                setIsMenuOpen(false);
-              }}
+              onClick={() => handleNavigation("/#products")}
               className="w-full text-left py-2 hover:bg-cyan-500 px-4 rounded flex items-center gap-2"
             >
               <Grid className="w-5 h-5" />
@@ -125,14 +125,18 @@ const Navbar: React.FC<NavbarProps> = ({
             </button>
 
             <button
-              onClick={() => {
-                setCurrentPage("profile");
-                setIsMenuOpen(false);
-              }}
+              onClick={() => handleNavigation("/profile")}
               className="w-full text-left py-2 hover:bg-cyan-500 px-4 rounded flex items-center gap-2"
             >
               <UserCircle className="w-5 h-5" />
               Perfil
+            </button>
+            <button
+              onClick={() => handleNavigation("/cart")}
+              className="w-full text-left py-2 hover:bg-cyan-500 px-4 rounded flex items-center gap-2"
+            >
+              <ShoppingCart className="w-5 h-5" />
+              Carrinho ({cartCount})
             </button>
           </nav>
         )}

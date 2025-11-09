@@ -1,6 +1,6 @@
 import React from "react";
-import { ShoppingCart } from "lucide-react";
 import type { CartItem } from "../../data/products";
+import { ShoppingCart } from "lucide-react";
 
 type Props = {
   cart: CartItem[];
@@ -11,7 +11,6 @@ type Props = {
 export const CartSummary: React.FC<Props> = ({ cart, total, navigate }) => {
   if (cart.length === 0) return null;
 
-  // A contagem de itens únicos no carrinho (cart.length) foi mantida
   return (
     <div className="fixed bottom-4 right-4 bg-white p-4 rounded-2xl shadow-2xl border-2 border-cyan-500 z-40 animate-in slide-in-from-bottom">
       <div className="flex items-center gap-3 mb-2">

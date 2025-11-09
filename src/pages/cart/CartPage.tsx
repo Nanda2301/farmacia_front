@@ -2,7 +2,6 @@ import React from 'react';
 import { ShoppingCart, Trash2, MinusCircle, PlusCircle, CreditCard } from 'lucide-react';
 import { toast } from 'react-toastify';
 import type { CartItem } from '../../data/products';
-import { useNavigate } from 'react-router-dom';
 
 type Props = {
   cart: CartItem[];

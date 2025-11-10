@@ -121,8 +121,8 @@ export const ProductsSection: React.FC<Props> = ({
                   </button>
                   <button
                     onClick={() => toggleFavorite(product.id)}
-                    className={`p-2 rounded-lg transition ${
-                      favorites.includes(product.id) ? "bg-red-500 text-white" : "bg-linear-to-r from-red-500 to-red-500"
+                    className={`p-2 rounded-lg transition flex items-center justify-center gap-2 ${
+                      favorites.includes(product.id) ? "bg-gradient-to-r from-red-500 to-red-500  text-white hover:bg-red-800" : "bg-gradient-to-r from-red-500 to-red-500 hover:scale-105"
                     }`}
                   >
                     <Heart className={`w-5 h-5 ${favorites.includes(product.id) ? "fill-white" : ""}`} />

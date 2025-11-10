@@ -102,7 +102,7 @@ const CheckoutPage: React.FC<Props> = ({ cart, totalCart, clearCart, navigate })
             placeholder="Endereço Completo (Rua, Número, Bairro, CEP)"
             value={formData.address}
             onChange={handleChange}
-            className="w-full p-3  text-black  border-gray-300 rounded-lg focus:ring-cyan-500 focus:border-cyan-500"
+            className="w-full p-3 border text-black  border-gray-300 rounded-lg focus:ring-cyan-500 focus:border-cyan-500"
             required
           />
           

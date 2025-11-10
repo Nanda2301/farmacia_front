@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import {
   Fish,
@@ -26,6 +26,21 @@ const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const location = useLocation();
 
+  // 1. Estado para controlar a visibilidade da animação
+  // true = Ícone (Fish) visível; false = Texto (PetPharm) visível
+  const [isIconVisible, setIsIconVisible] = useState(true);
+
+  // 2. Efeito para criar o ciclo de alternância
+  useEffect(() => {
+    // Alterne o estado a cada 3 segundos (3000ms)
+    const interval = setInterval(() => {
+      setIsIconVisible((prev) => !prev);
+    }, 3000);
+
+    // Limpeza: garante que o intervalo seja parado
+    return () => clearInterval(interval);
+  }, []);
+
   const handleNavigation = (path: string) => {
     navigate(path);
     setIsMenuOpen(false);
@@ -39,13 +54,19 @@ const Navbar: React.FC<NavbarProps> = ({
   };
 
   const getButtonClass = (path: string) => {
-    const baseClass = "bg-gradient-to-bl from-blue-500 via-cyan-500 to-teal-500 py-2 hover:bg-cyan-500 px-4 rounded flex items-center gap-2 transition";
-    return isActive(path) ? `${baseClass} text-yellow-200 ring-2 ring-yellow-200` : baseClass;
+    const baseClass =
+      "bg-gradient-to-bl from-blue-500 via-cyan-500 to-teal-500 py-2 hover:bg-cyan-500 px-4 rounded flex items-center gap-2 transition";
+    return isActive(path)
+      ? `${baseClass} text-yellow-200 ring-2 ring-yellow-200`
+      : baseClass;
   };
 
   const getMobileButtonClass = (path: string) => {
-    const baseClass = "bg-linear-to-r from-cyan-800 to-teal-300 w-full text-left py-2 hover:bg-cyan-500 px-4 rounded flex items-center gap-2";
-    return isActive(path) ? `${baseClass} text-yellow-200 ring-2 ring-yellow-200` : baseClass;
+    const baseClass =
+      "bg-linear-to-r from-cyan-800 to-teal-300 w-full text-left py-2 hover:bg-cyan-500 px-4 rounded flex items-center gap-2";
+    return isActive(path)
+      ? `${baseClass} text-yellow-200 ring-2 ring-yellow-200`
+      : baseClass;
   };
 
   return (
@@ -55,16 +76,31 @@ const Navbar: React.FC<NavbarProps> = ({
           className="flex items-center gap-3 cursor-pointer select-none"
           onClick={() => handleNavigation("/home")}
         >
-          <div className="bg-white p-2 rounded-full shadow-md">
-            <Fish className="w-8 h-8 text-cyan-500" />
+          {/* Container para o Ícone e o Título Principal - ATENÇÃO AQUI */}
+          <div className="relative w-[48px] h-[48px] flex items-center justify-center"> {/* w-[48px] e h-[48px] para garantir espaço */}
+            {/* Ícone (Fish) - Alterna com o Texto */}
+            <div
+              className={`bg-white p-2 rounded-full shadow-md transition-opacity duration-1000 ${
+                isIconVisible ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              <Fish className="w-8 h-8 text-cyan-500" />
+            </div>
+
+            {/* Título Principal (PetPharm) - Alterna com o Ícone */}
+            <div
+              className={`absolute top-0 left-0 w-max transition-opacity duration-1000 ${
+                isIconVisible ? "opacity-0" : "opacity-100"
+              }`}
+            >
+              <h1 className="text-2xl font-bold flex items-center gap-2">
+                PetPharm{" "}
+                <Sparkles className="w-6 h-6 text-yellow-200" />
+              </h1>
+            </div>
           </div>
-          <div>
-            <h1 className="text-2xl font-bold flex items-center gap-2">
-              PetPharm <Sparkles className="w-6 h-6 text-yellow-200" />
-            </h1>
-            <p className="text-xs text-cyan-100">
-              Farmácia Mágica para Pets
-            </p>
+          
+          <div className="flex flex-col justify-center">
           </div>
         </div>
 

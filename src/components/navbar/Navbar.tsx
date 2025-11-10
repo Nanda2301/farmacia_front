@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import {
   Fish,
   Sparkles,
@@ -23,26 +24,33 @@ const Navbar: React.FC<NavbarProps> = ({
   isMenuOpen,
   setIsMenuOpen,
 }) => {
-  const currentPath = window.location.pathname;
+  const location = useLocation();
 
   const handleNavigation = (path: string) => {
     navigate(path);
     setIsMenuOpen(false);
   };
 
-  const getPageClass = (path: string) => {
-    if (path === "/home")
-      return currentPath === "/home" || currentPath === "/products"
-        ? "text-yellow-200"
-        : "";
+  const isActive = (path: string) => {
+    if (path === "/home") {
+      return location.pathname === "/" || location.pathname === "/home";
+    }
+    return location.pathname === path;
+  };
 
-    return currentPath.startsWith(path) ? "text-yellow-200" : "";
+  const getButtonClass = (path: string) => {
+    const baseClass = "bg-gradient-to-bl from-blue-500 via-cyan-500 to-teal-500 py-2 hover:bg-cyan-500 px-4 rounded flex items-center gap-2 transition";
+    return isActive(path) ? `${baseClass} text-yellow-200 ring-2 ring-yellow-200` : baseClass;
+  };
+
+  const getMobileButtonClass = (path: string) => {
+    const baseClass = "bg-linear-to-r from-cyan-800 to-teal-300 w-full text-left py-2 hover:bg-cyan-500 px-4 rounded flex items-center gap-2";
+    return isActive(path) ? `${baseClass} text-yellow-200 ring-2 ring-yellow-200` : baseClass;
   };
 
   return (
     <header className="bg-gradient-to-bl from-cyan-800 to-teal-300 text-white shadow-md sticky top-0 z-50">
       <div className="container mx-auto flex justify-between items-center px-4 py-3">
-
         <div
           className="flex items-center gap-3 cursor-pointer select-none"
           onClick={() => handleNavigation("/home")}
@@ -60,26 +68,20 @@ const Navbar: React.FC<NavbarProps> = ({
           </div>
         </div>
 
-
+        {/* Desktop */}
         <div className="flex items-center gap-6">
           <nav className="hidden md:flex items-center gap-6">
-      
             <button
               onClick={() => handleNavigation("/home")}
-              className={`bg-gradient-to-bl from-blue-500 via-cyan-500 to-teal-500 py-2 hover:bg-cyan-500 px-4 rounded flex items-center gap-2 transition ${getPageClass(
-                "/home"
-              )}`}
+              className={getButtonClass("/home")}
             >
               <Home className="w-5 h-5" />
               Início
             </button>
 
-
             <button
               onClick={() => handleNavigation("/products")}
-              className={`bg-gradient-to-bl from-blue-500 via-cyan-500 to-teal-500 py-2 hover:bg-cyan-500 px-4 rounded flex items-center gap-2 transition ${getPageClass(
-                "/products"
-              )}`}
+              className={getButtonClass("/products")}
             >
               <Grid className="w-5 h-5" />
               Produtos
@@ -87,9 +89,7 @@ const Navbar: React.FC<NavbarProps> = ({
 
             <button
               onClick={() => handleNavigation("/profile")}
-              className={`bg-gradient-to-bl from-blue-500 via-cyan-500 to-teal-500 py-2 hover:bg-cyan-500 px-4 rounded flex items-center gap-2 transition ${getPageClass(
-                "/profile"
-              )}`}
+              className={getButtonClass("/profile")}
             >
               <UserCircle className="w-5 h-5" />
               Perfil
@@ -109,6 +109,7 @@ const Navbar: React.FC<NavbarProps> = ({
             </button>
           </nav>
 
+          {/* Mobile Menu Button */}
           <button
             className="bg-gradient-to-bl from-blue-500 via-cyan-500 to-teal-500 w-full text-left py-2 hover:bg-cyan-500 px-4 rounded flex items-center gap-2 md:hidden"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -123,11 +124,12 @@ const Navbar: React.FC<NavbarProps> = ({
         </div>
       </div>
 
+      {/* Mobile Menu */}
       {isMenuOpen && (
         <nav className="md:hidden mt-2 pb-4 space-y-2 animate-fade-in-down px-4">
           <button
             onClick={() => handleNavigation("/home")}
-            className="bg-linear-to-r from-cyan-800 to-teal-300 w-full text-left py-2 hover:bg-cyan-500 px-4 rounded flex items-center gap-2"
+            className={getMobileButtonClass("/home")}
           >
             <Home className="w-5 h-5" />
             Início
@@ -135,7 +137,7 @@ const Navbar: React.FC<NavbarProps> = ({
 
           <button
             onClick={() => handleNavigation("/products")}
-            className="bg-linear-to-r from-cyan-800 to-teal-300 w-full text-left py-2 hover:bg-cyan-500 px-4 rounded flex items-center gap-2"
+            className={getMobileButtonClass("/products")}
           >
             <Grid className="w-5 h-5" />
             Produtos
@@ -143,7 +145,7 @@ const Navbar: React.FC<NavbarProps> = ({
 
           <button
             onClick={() => handleNavigation("/profile")}
-            className="bg-linear-to-r from-cyan-800 to-teal-300 w-full text-left py-2 hover:bg-cyan-500 px-4 rounded flex items-center gap-2"
+            className={getMobileButtonClass("/profile")}
           >
             <UserCircle className="w-5 h-5" />
             Perfil
@@ -151,7 +153,7 @@ const Navbar: React.FC<NavbarProps> = ({
 
           <button
             onClick={() => handleNavigation("/cart")}
-            className="bg-linear-to-r from-cyan-800 to-teal-300 w-full text-left py-2 hover:bg-cyan-500 px-4 rounded flex items-center gap-2"
+            className={getMobileButtonClass("/cart")}
           >
             <ShoppingCart className="w-5 h-5" />
             Carrinho ({cartCount})

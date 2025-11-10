@@ -12,10 +12,6 @@ import CheckoutPage from './pages/checkout/CheckoutPage';
 import ProfilePage from './pages/profile/ProfilePage';
 import { products as productsData, type CartItem, type Product } from "./data/products";
 
-const scrollToTop = () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-};
-
 type ProductsSectionProps = React.ComponentProps<typeof ProductsSection>;
 
 interface HomeRouteProps {

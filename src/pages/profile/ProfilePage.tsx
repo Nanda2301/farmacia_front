@@ -5,7 +5,6 @@ type Props = {
   favorites: number[];
 }
 
-// Simulação de Dados de Pedidos
 const mockOrders = [
   { id: '2025001', date: '01/10/2025', total: 179.80, status: 'Entregue', items: 2 },
   { id: '2025002', date: '15/10/2025', total: 45.90, status: 'Em Processamento', items: 1 },
@@ -21,7 +20,7 @@ const ProfilePage: React.FC<Props> = ({ favorites }) => {
       </h2>
       
       <div className="grid md:grid-cols-3 gap-8">
-        {/* Informações do Usuário */}
+        
         <div className="md:col-span-1 bg-white p-6 rounded-2xl shadow-lg h-fit">
           <div className="text-center mb-6">
             <div className="text-7xl mb-2">🧙‍♀️</div>
@@ -40,7 +39,6 @@ const ProfilePage: React.FC<Props> = ({ favorites }) => {
           </div>
         </div>
 
-        {/* Histórico de Pedidos */}
         <div className="md:col-span-2 bg-white p-6 rounded-2xl shadow-lg">
           <h3 className="text-2xl font-bold text-gray-800 flex items-center gap-2 mb-6">
             <History className="w-6 h-6 text-teal-600" /> Histórico de Pedidos

@@ -47,16 +47,15 @@ export const ProductsSection: React.FC<Props> = ({
       <div className="container mx-auto px-4">
         <h3 className="text-3xl font-bold text-center text-gray-800 mb-8">Nossos Produtos Mágicos 🪄</h3>
         
-        {/* ... (restante do código de busca e categorias) ... */}
         <div className="max-w-2xl mx-auto mb-8">
           <div className="relative">
             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
             <input
               type="text"
-              placeholder="Procure por produtos mágicos..."
+              placeholder="Procure por produtos..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 rounded-full border-2 border-cyan-200 focus:border-cyan-500 focus:outline-none shadow-md"
+              className="w-full pl-12 pr-4 py-3 rounded-full border-2 text-black border-cyan-200 focus:border-cyan-500 focus:outline-none shadow-md"
             />
           </div>
         </div>
@@ -69,7 +68,7 @@ export const ProductsSection: React.FC<Props> = ({
               className={`px-6 py-2 rounded-full font-semibold whitespace-nowrap transition ${
                 selectedCategory === cat
                   ? "bg-gradient-to-r from-cyan-500 to-teal-500 text-white shadow-lg"
-                  : "bg-white text-gray-700 hover:bg-cyan-100"
+                  : "flex-1 bg-gradient-to-r from-cyan-500 to-teal-500 text-white py-2 rounded-lg font-semibold hover:scale-100 transition flex items-center justify-center gap-2"
               }`}
             >
               {cat}
@@ -123,7 +122,7 @@ export const ProductsSection: React.FC<Props> = ({
                   <button
                     onClick={() => toggleFavorite(product.id)}
                     className={`p-2 rounded-lg transition ${
-                      favorites.includes(product.id) ? "bg-red-500 text-white" : "bg-gray-100 text-gray-600 hover:bg-red-100"
+                      favorites.includes(product.id) ? "bg-red-500 text-white" : "bg-linear-to-r from-red-500 to-red-500"
                     }`}
                   >
                     <Heart className={`w-5 h-5 ${favorites.includes(product.id) ? "fill-white" : ""}`} />

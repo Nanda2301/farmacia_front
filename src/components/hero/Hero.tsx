@@ -7,7 +7,7 @@ type Props = {
 
 export const Hero: React.FC<Props> = ({ setCurrentPage }) => {
   return (
-    <section className="bg-gradient-to-br from-cyan-50 via-blue-50 to-teal-50 py-16">
+    <section className="bg-linear-to-br from-cyan-50 via-blue-50 to-teal-50 py-16">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div className="space-y-6">
@@ -20,7 +20,7 @@ export const Hero: React.FC<Props> = ({ setCurrentPage }) => {
             </p>
             <div className="flex gap-4">
               <button
-                onClick={() => setCurrentPage("/#products")}
+                onClick={() => setCurrentPage("/products")}
                 className="bg-gradient-to-r from-cyan-500 to-teal-500 text-white px-8 py-3 rounded-full font-semibold hover:scale-105 transition shadow-lg flex items-center gap-2"
               >
                 <ShoppingBag className="w-5 h-5" />

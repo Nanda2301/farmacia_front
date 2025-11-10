@@ -42,14 +42,13 @@ const CartPage: React.FC<Props> = ({ cart, totalCart, updateCartQuantity, remove
       </h2>
       
       <div className="grid md:grid-cols-3 gap-8">
-        {/* Lista de Itens */}
         <div className="md:col-span-2 bg-white p-6 rounded-2xl shadow-lg">
           {cart.length === 0 ? (
             <div className="text-center py-10">
-              <p className="text-xl text-gray-500 mb-4">Seu carrinho está vazio! 😔</p>
+              <p className="text-xl text-gray-500 mb-4">Seu carrinho está vazio!</p>
               <button
                 onClick={() => navigate('/')}
-                className="bg-cyan-500 text-white px-6 py-2 rounded-full hover:bg-cyan-600 transition"
+                className="bg-linear-to-r from-cyan-800 to-teal-300 text-white px-6 py-2 rounded-full hover:bg-cyan-500"
               >
                 Voltar às Compras
               </button>
@@ -66,11 +65,10 @@ const CartPage: React.FC<Props> = ({ cart, totalCart, updateCartQuantity, remove
                     </div>
                   </div>
                   <div className="flex items-center gap-4 w-full justify-end sm:w-auto">
-                    {/* Controles de Quantidade */}
                     <div className="flex items-center border rounded-lg">
                       <button
                         onClick={() => handleUpdateQuantity(item.id, -1, item.stock, item.name)}
-                        className="p-2 text-cyan-500 hover:bg-cyan-100 rounded-l-lg transition"
+                        className="bg-gradient-to-bl from-blue-500 via-cyan-500 to-teal-500 w-full text-left py-2 hover:bg-cyan-500 p-2 text-white hover:bg-cyan-100 rounded-l-lg transition"
                         aria-label="Diminuir quantidade"
                       >
                         <MinusCircle className="w-5 h-5" />
@@ -78,20 +76,18 @@ const CartPage: React.FC<Props> = ({ cart, totalCart, updateCartQuantity, remove
                       <span className="px-3 font-semibold text-gray-700">{item.quantity}</span>
                       <button
                         onClick={() => handleUpdateQuantity(item.id, 1, item.stock, item.name)}
-                        className="p-2 text-cyan-500 hover:bg-cyan-100 rounded-r-lg transition"
+                        className="bg-gradient-to-bl from-blue-500 via-cyan-500 to-teal-500 w-full text-left py-2 hover:bg-cyan-500 p-2 text-white hover:bg-cyan-100 rounded-r-lg transition"
                         aria-label="Aumentar quantidade"
                       >
                         <PlusCircle className="w-5 h-5" />
                       </button>
                     </div>
 
-                    {/* Total do Item */}
                     <span className="font-bold text-gray-800 w-20 text-right">R$ {(item.price * item.quantity).toFixed(2)}</span>
 
-                    {/* Botão de Remover */}
                     <button
                       onClick={() => handleRemoveItem(item.id, item.name)}
-                      className="text-red-500 hover:text-red-700 transition p-2 ml-2"
+                      className="bg-gradient-to-bl from-red-600 via-red-500 to-red-400 text-left py-2 px-2 text-white hover:from-red-700 hover:via-red-600 hover:to-red-500 rounded-r-lg transition flex items-center justify-center"
                       aria-label="Remover item"
                     >
                       <Trash2 className="w-5 h-5" />
@@ -103,7 +99,6 @@ const CartPage: React.FC<Props> = ({ cart, totalCart, updateCartQuantity, remove
           )}
         </div>
 
-        {/* Resumo do Pedido */}
         <div className="md:col-span-1 bg-linear-to-br from-cyan-100 to-teal-100 p-6 rounded-2xl shadow-xl sticky top-4 h-fit">
           <h3 className="text-2xl font-bold text-gray-800 mb-4">Resumo</h3>
           <div className="flex justify-between border-b pb-2 mb-2">

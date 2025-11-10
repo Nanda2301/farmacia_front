@@ -5,9 +5,7 @@ export const Footer: React.FC = () => {
   return (
     <footer className="bg-gradient-to-r from-gray-800 to-gray-900 text-white py-12">
       <div className="container mx-auto px-4">
-        {/* Grid Principal */}
         <div className="grid md:grid-cols-4 gap-8 mb-8">
-          {/* Coluna 1 */}
           <div>
             <h5 className="font-bold text-lg mb-4 flex items-center gap-2">
               <Fish className="w-6 h-6 text-cyan-400" />
@@ -18,11 +16,8 @@ export const Footer: React.FC = () => {
             </p>
           </div>
 
-          {/* Você pode adicionar as outras colunas aqui */}
-          {/* Ex.: Links rápidos, Suporte, Newsletter */}
         </div>
 
-        {/* Rodapé inferior */}
         <div className="border-t border-gray-700 pt-8 text-center text-gray-400 text-sm">
           <p>© 2025 PetPharm - Todos os direitos mágicos reservados 🪄</p>
           <p className="mt-2 flex items-center justify-center gap-2">

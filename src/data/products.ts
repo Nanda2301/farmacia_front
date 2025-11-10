@@ -27,7 +27,7 @@ export const products: Product[] = [
   {
     id: 2,
     name: "Elixir da Energia Infinita",
-    description: "Especial para gatos preguiçosos que só dormem",
+    description: "Especial para gatos preguiçosos que dormem o dia inteiro",
     price: 119.9,
     category: "Elixires",
     image: "⚡",
@@ -47,7 +47,7 @@ export const products: Product[] = [
   {
     id: 4,
     name: "Spray Anti-Sofá Arranhado",
-    description: "Proteja sua mobília dos ataques felinos noturnos",
+    description: "Proteja sua mobília dos ataques felinos noturnos e diurnos",
     price: 67.9,
     category: "Sprays Mágicos",
     image: "🪄",
